@@ -503,6 +503,8 @@ class MageHost_BlockCache_Model_Observer extends Mage_Core_Model_Abstract
         $customerSession = Mage::getSingleton('customer/session');
         if ($customerSession instanceof Mage_Customer_Model_Session) {
             $result .= '|cg' . $customerSession->getCustomerGroupId();
+            $customer  = Mage::getModel('customer/customer')->load($customerSession->getId());
+            $result .= '|' . $customer->getResource()->getAttribute('fleurop2020')->getSource()->getOptionText($customer->getData('fleurop2020'));
         }
         $result .= '|' . $store->getId();
         $result .= '|' . $store->getCurrentCurrencyCode();
